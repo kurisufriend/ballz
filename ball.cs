@@ -62,7 +62,7 @@ namespace game
 		}
 		public void Run(RenderWindow window)
 		{
-			RunPhysics(new Vector2f(0f, 0.000002f * this.shape.Radius));
+			RunPhysics(new Vector2f(0f, .0001f));
 			window.Draw(this.shape);
 		}
 	}

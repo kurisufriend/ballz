@@ -21,7 +21,7 @@ namespace game
 			cursor.FillColor = Color.Green;
 
 			ball_t ball = new ball_t(50f);
-			ball_t ball2 = new ball_t(50f, new Vector2f(100, 100), new Vector2f(1f, .5f));
+			ball_t ball2 = new ball_t(25f, new Vector2f(100, 100), new Vector2f(.5f, .5f));
 
 			// main loop
 			while (window.IsOpen)
