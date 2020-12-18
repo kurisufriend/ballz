@@ -17,29 +17,16 @@ namespace game
 
 			callbacks.registerCallbacks(window);
 
-			CircleShape cursor = new CircleShape(25f);
-			cursor.FillColor = Color.Green;
+			g.entityList.Add(new ball_t(50f, new Vector2f(1280 / 2, 720 / 2), new Vector2f(.2f, .2f)));
+			g.entityList.Add(new ball_t(25f, new Vector2f(100, 100), new Vector2f(.2f, .2f)));
+			g.entityList.Add(new ball_t(25f, new Vector2f(300, 100), new Vector2f(.2f, .2f)));
+			g.entityList.Add(new ball_t(25f, new Vector2f(200, 100), new Vector2f(.2f, .2f)));
 
-			ball_t ball = new ball_t(50f);
-			ball_t ball2 = new ball_t(25f, new Vector2f(100, 100), new Vector2f(.5f, .5f));
-
-			// main loop
 			while (window.IsOpen)
 			{
 				window.DispatchEvents();
-
-				cursor.Position = new Vector2f(g.mouse.position.X - (cursor.GetLocalBounds().Width / 2), g.mouse.position.Y - (cursor.GetLocalBounds().Height / 2));
-				if (g.mouse.button == Mouse.Button.Left && g.mouse.buttonState)
-					cursor.FillColor = Color.Red;
-				else
-					cursor.FillColor = Color.Green;
-
 				window.Clear();
-
-				// add stuff to drawing surface
-				window.Draw(cursor);
-				ball.Run(window);
-				ball2.Run(window);
+				g.entityList.Run(window);
 				window.Display();
 			}
 		}

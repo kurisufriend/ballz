@@ -37,13 +37,15 @@ namespace game
 		{
 			//temp place for collision stuff
 			Vector2f center = new Vector2f(this.shape.Position.X + (this.shape.GetLocalBounds().Width / 2), this.shape.Position.Y + (this.shape.GetLocalBounds().Height / 2));
-			bool isValidPosition = ((center.X > (1280 - (this.shape.GetLocalBounds().Width / 2)) || center.Y > (720 - (this.shape.GetLocalBounds().Height / 2))) || (center.X < (0 + (this.shape.GetLocalBounds().Width / 2)) || center.Y < (0 + (this.shape.GetLocalBounds().Height / 2))));
-			if (isValidPosition || collisionHandler.isColliding(this))
+			bool isValidPositionX = ((center.X > (1280 - (this.shape.GetLocalBounds().Width / 2)) || (center.X < (0 + (this.shape.GetLocalBounds().Width / 2)))));
+			bool isValidPositionY = ((center.Y > (720 - (this.shape.GetLocalBounds().Height / 2))) || center.Y < (0 + (this.shape.GetLocalBounds().Height / 2)));
+			if ((isValidPositionX || isValidPositionY) || collisionHandler.isColliding(this).colliding)
 			{
 				//this.shape.Position = new Vector2f(1280 / 2, 720 / 2);
-				this.velocity *= -1;
+				this.velocity.X *= isValidPositionX ? -1f : 1f;
+				this.velocity.Y *= isValidPositionY ? -1f : 1f;
 				this.velocity /= 2f;
-				this.shape.Position += new Vector2f(0, -1F);
+				this.shape.Position += new Vector2f(0, -.1F);
 				this.shape.Position = new Vector2f(Math.Clamp(this.shape.Position.X, 0, 1280), Math.Clamp(this.shape.Position.Y, 0, 720));
 				Console.WriteLine("COLLISION: "+this.velocity.Y.ToString());
 			}
@@ -51,11 +53,13 @@ namespace game
 			this.shape.Position += this.velocity;
 			ball_t dummy = this;
 			dummy.shape.Position = this.shape.Position;
-			if (collisionHandler.isColliding(dummy))
+			collision_t simCollision = collisionHandler.isColliding(dummy);
+			if (simCollision.colliding)
 			{ 
 				this.shape.Position = oldPosition;
 				this.velocity *= -1;
 				this.velocity /= 2f;
+				//this.velocity *= simCollision.force;
 			}
 			if ((Math.Abs(this.velocity.X) < 1 ) && (Math.Abs(this.velocity.Y) < 1))
 				this.velocity += forces;
