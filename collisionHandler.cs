@@ -22,6 +22,15 @@ namespace game
 		{
 			return (float)Math.Sqrt(v.X * v.X + v.Y * v.Y);
 		}
+		public static float TEMP_vecDist(Vector2f v, Vector2f v2)
+		{
+			Vector2f delta = new Vector2f();
+
+			delta.X = v.X - v2.X;
+			delta.X = v.Y - v2.Y;
+
+			return TEMP_vecLen(delta);
+		}
 		public static List<ball_t> registry = new List<ball_t>();
 
 		public static collision_t isColliding(ball_t ball)

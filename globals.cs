@@ -13,6 +13,7 @@ namespace game
 	{
 		public static mouse_t mouse = new mouse_t();
 		public static Random rand = new Random();
-		public static entityList entityList = new entityList();
+		public static entityList_t entityList = new entityList_t();
+		public static RenderTexture renderTexture = new RenderTexture(1280, 720);
 	}
 }

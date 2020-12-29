@@ -22,11 +22,16 @@ namespace game
 			g.entityList.Add(new ball_t(25f, new Vector2f(300, 100), new Vector2f(.2f, .2f)));
 			g.entityList.Add(new ball_t(25f, new Vector2f(200, 100), new Vector2f(.2f, .2f)));
 
+
 			while (window.IsOpen)
 			{
 				window.DispatchEvents();
-				window.Clear();
 				g.entityList.Run(window);
+				g.renderTexture.Display();
+				window.Clear();
+				Sprite sprite = new Sprite(g.renderTexture.Texture);
+				window.Draw(sprite);
+				g.renderTexture.Clear();
 				window.Display();
 			}
 		}

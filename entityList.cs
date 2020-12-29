@@ -6,7 +6,7 @@ using game;
 
 namespace game
 {
-	class entityList : List<ball_t>
+	class entityList_t : List<ball_t>
 	{
 		public void Run(RenderWindow window)
 		{

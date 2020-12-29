@@ -47,7 +47,7 @@ namespace game
 				this.velocity /= 2f;
 				this.shape.Position += new Vector2f(0, -.1F);
 				this.shape.Position = new Vector2f(Math.Clamp(this.shape.Position.X, 0, 1280), Math.Clamp(this.shape.Position.Y, 0, 720));
-				Console.WriteLine("COLLISION: "+this.velocity.Y.ToString());
+				//Console.WriteLine("COLLISION: "+this.velocity.Y.ToString());
 			}
 			Vector2f oldPosition = this.shape.Position;
 			this.shape.Position += this.velocity;
@@ -67,7 +67,7 @@ namespace game
 		public void Run(RenderWindow window)
 		{
 			RunPhysics(new Vector2f(0f, .0001f));
-			window.Draw(this.shape);
+			g.renderTexture.Draw(this.shape);
 		}
 	}
 }
